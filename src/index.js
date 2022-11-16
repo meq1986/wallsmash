@@ -37,6 +37,7 @@ let ball_speed;
 
 const BALL_RADIUS = 10
 const MIN_ANGLE = Math.PI/12
+// 游戏的主界面 10列10行
 const NUM_ROWS = 10
 const NUM_COLS = 10
 
@@ -48,6 +49,7 @@ let items = new Set()
 
 
 function startGame(){
+    // 有四种状态 lost aiming playing levelup
     game_state = 'aiming'
     
     currentLevel = 5
@@ -65,6 +67,7 @@ function startGame(){
     items = new Set()
     ball_start_pos = undefined
 
+    // 初始时 有4行砖块
     for(let i = 0; i<4; i++)updateCellsForCurrentLevel()
 
 }
@@ -1421,6 +1424,11 @@ function getBottom(){
 
 let last
 
+
+// ctx 应该是context的缩写
+// canvas似乎是index.html中定义的 id=canvas
+// 在js中 可以直接引用html的标签吗？
+// 应该是可以的，我把html的id改了，游戏就无法启动
 ctx = canvas.getContext('2d');
 scoreSpan = document.getElementById("score")
 
@@ -1433,7 +1441,10 @@ try {
 
 startGame()
 
-
+// Arrow function expressions =>
+// => 用以定义方法 跟fuction关键字类似
+// param => expression , 前部是参数，后部是方法体
+// 以下的意思是， requestAnimationFrame调用匿名方法，并且传值给t
 requestAnimationFrame(t => {
     last = t
     requestAnimationFrame(tick)
